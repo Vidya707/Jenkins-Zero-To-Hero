@@ -6,8 +6,8 @@ pipeline {
         }
   }
   environment {
-    JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
-    MAVEN_OPTS = 'Dmaven.repo.local=$HOME/.m2/repository'//local repo
+    JAVA_HOME = '/usr/local/openjdk-17'
+    MAVEN_OPTS = '-Dmaven.repo.local=$HOME/.m2/repository'//local repo
   }
   stages {
     stage('Checkout'){
