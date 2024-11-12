@@ -5,7 +5,7 @@ pipeline {
         args '-v $HOME/.m2:/root/.m2'
         }
   }
-  envirnment {
+  environment {
     MAVEN_OPTS = 'Dmaven.repo.local=$HOME/.m2/repository'//local repo
   }
   stages {
