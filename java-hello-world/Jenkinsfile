@@ -9,11 +9,12 @@ pipeline {
     stage('Checkout'){
         steps {
             //checkout code
-            checkout scm
+            git 'https://github.com/Vidya707/Jenkins-Zero-To-Hero.git'
         }
     }
     stage('Build'){
         steps {
+          dir('java-hello-world/java-hello')
             sh 'java -version'
             sh 'mvn -v'
             sh 'mvn clean package'
