@@ -2,13 +2,9 @@ pipeline {
   agent {
     docker { 
         image 'maven:3.8.5-openjdk-17' 
-        args '-v $HOME/.m2:/root/.m2'
+        args '-v /root/.m2:/root/.m2'
         }
-  }
-  environment {
-    JAVA_HOME = '/usr/local/openjdk-17'
-    MAVEN_OPTS = '-Dmaven.repo.local=$HOME/.m2/repository'//local repo
-  }
+   }
   stages {
     stage('Checkout'){
         steps {
@@ -18,17 +14,15 @@ pipeline {
     }
     stage('Build'){
         steps {
+            sh 'java -version'
+            sh 'mvn -v'
             sh 'mvn clean package'
-        }
-    }
-    stage('Archive artifact'){
-        steps{
-            archiveArtifacts '**/target/*.jar'
         }
     }
   }
   post {
     always {
+        archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
         //clean workspace after build
         cleanWs()
     }
